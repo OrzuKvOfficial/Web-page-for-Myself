@@ -4,7 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title> Orzu's Social Network</title>
+    <title>Orzu's Social Network</title>
     <!-- Bootstrap CSS -->
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
     <!-- Custom CSS -->
@@ -115,6 +115,7 @@
                 </div>
             </div>
         </div>
+
     </header>
 
     <!-- Bootstrap JS -->
@@ -127,10 +128,23 @@
             $('#welcomeText').css('opacity', '1');
             $('#welcomeText').css('transform', 'translateY(0)');
 
-            // Card animatsiyasi
-            $('.card').each(function (index) {
-                $(this).css('transition-delay', index * 200 + 'ms');
-                $(this).addClass('show');
+            // Function to trigger animation on card elements
+            function animateCards() {
+                $('.card').each(function (index) {
+                    $(this).css('transition-delay', index * 200 + 'ms');
+                    $(this).addClass('show');
+                });
+            }
+
+            // Trigger animation when the page loads
+            animateCards();
+
+            // Trigger animation when scrolling on mobile devices
+            $(window).scroll(function () {
+                var viewportWidth = $(window).width();
+                if (viewportWidth <= 576) { // Check if viewport is less than or equal to 576px (Bootstrap's mobile breakpoint)
+                    animateCards();
+                }
             });
         });
     </script>
