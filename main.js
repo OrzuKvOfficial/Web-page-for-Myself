@@ -81,3 +81,50 @@
             navItem.style.display = 'none';
         });
     }
+
+
+    // 1. Kötü Niyetli Kodları Engelleyin
+// Kullanıcı girişleri veya dış kaynaklardan gelen verileri güvenli bir şekilde işleyin.
+function cleanInput(input) {
+    // Örnek bir temizleme işlemi - bu işlemi gerektiğine göre ayarlayabilirsiniz.
+    return input.replace(/[<>&'"]/g, '');
+}
+
+// 2. XSS (Cross-Site Scripting) Saldırılarını Önleyin
+// Kullanıcı girdilerini güvenli bir şekilde çıktıya dönüştürün.
+function escapeHtml(unsafe) {
+    return unsafe
+         .replace(/&/g, "&amp;")
+         .replace(/</g, "&lt;")
+         .replace(/>/g, "&gt;")
+         .replace(/"/g, "&quot;")
+         .replace(/'/g, "&#039;");
+}
+
+// 3. Clickjacking Saldırılarını Önleyin
+// Sayfanızın görsel alanını gizlemek için X-Frame-Options kullanın.
+// Bu, başka sitelerin içeriklerini iframe içinde gömülü olarak yüklemeyi önler.
+// Örneğin:
+// response.setHeader('X-Frame-Options', 'DENY'); 
+
+// 4. Tarayıcıda Güvenli Oturum Yönetimi
+// Güvenli oturum yönetimi için HTTPS kullanın.
+// Kullanıcı oturumlarını belirlemek için JWT (JSON Web Token) gibi güvenli yöntemler kullanın.
+
+// 5. Güvenlik Açıklarını İzleyin
+// Tarayıcıların güvenlik açıklarını hızlıca kapatmak için düzenli olarak güncelleyin.
+
+// 6. Güvenlik Testlerini Yapın
+// Web uygulamanızı düzenli olarak güvenlik açıkları için test edin.
+
+// 7. Güncel Yazılımlar ve Kütüphaneler
+// Kullandığınız kütüphaneleri ve yazılımları düzenli olarak güncelleyin.
+
+// 8. Gereksiz Bilgi Paylaşımını Önleyin
+// Hata mesajlarında gereksiz bilgileri paylaşmayın. Sadece gerekli bilgileri paylaşın.
+
+// Örnek kullanım:
+let userInput = "<script>alert('XSS saldırısı!');</script>";
+let cleanedInput = cleanInput(userInput);
+let escapedHtml = escapeHtml(cleanedInput);
+console.log(escapedHtml); // <script>alert('XSS saldırısı!');</script> --> Güvenli hale getirilmiş çıktı
