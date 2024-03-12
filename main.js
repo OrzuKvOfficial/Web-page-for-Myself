@@ -128,3 +128,27 @@ let userInput = "<script>alert('XSS saldırısı!');</script>";
 let cleanedInput = cleanInput(userInput);
 let escapedHtml = escapeHtml(cleanedInput);
 console.log(escapedHtml); // <script>alert('XSS saldırısı!');</script> --> Güvenli hale getirilmiş çıktı
+
+// Ma'lumotni kriptografiya qilish uchun kriptografiya kutubxonasini ishlatish
+const CryptoJS = require('crypto-js');
+
+// Ma'lumotni kriptografiya qilish funksiyasi
+function encryptData(data, key) {
+    return CryptoJS.AES.encrypt(data, key).toString();
+}
+
+// Kriptografiya qilingan ma'lumotni qaytarish funksiyasi
+function decryptData(encryptedData, key) {
+    const bytes = CryptoJS.AES.decrypt(encryptedData, key);
+    return bytes.toString(CryptoJS.enc.Utf8);
+}
+
+// Ma'lumot kriptografiya qilinadi
+const originalData = "Maxfiy ma'lumot";
+const secretKey = "sirli_kalit";
+const encryptedData = encryptData(originalData, secretKey);
+console.log("Kriptografiya qilingan ma'lumot:", encryptedData);
+
+// Kriptografiya qilingan ma'lumotni qaytarish
+const decryptedData = decryptData(encryptedData, secretKey);
+console.log("Qaytarilgan ma'lumot:", decryptedData);
