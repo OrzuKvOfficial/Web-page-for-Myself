@@ -160,3 +160,33 @@ imageElement.addEventListener('error', () => {
     console.error('Rasm yuklanmadi');
 });
 document.body.appendChild(imageElement);
+
+// Hisoblash mashinasini yaratish
+var calculator = {
+    // Qo'shilish funktsiyasi
+    add: function(x, y) {
+        return x + y;
+    },
+    // Ayirish funktsiyasi
+    subtract: function(x, y) {
+        return x - y;
+    },
+    // Ko'paytirish funktsiyasi
+    multiply: function(x, y) {
+        return x * y;
+    },
+    // Bo'lish funktsiyasi
+    divide: function(x, y) {
+        if (y === 0) {
+            return "Nolga bo'lish mumkin emas";
+        }
+        return x / y;
+    }
+};
+
+// Test qilish
+console.log("Qo'shish: " + calculator.add(5, 3));       // Natija: 8
+console.log("Ayirish: " + calculator.subtract(10, 4));  // Natija: 6
+console.log("Ko'paytirish: " + calculator.multiply(2, 6)); // Natija: 12
+console.log("Bo'lish: " + calculator.divide(8, 2));     // Natija: 4
+console.log("Bo'lish: " + calculator.divide(10, 0));    // Natija: "Nolga bo'lish mumkin emas"
