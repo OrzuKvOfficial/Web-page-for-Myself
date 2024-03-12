@@ -152,3 +152,4 @@ console.log("Kriptografiya qilingan ma'lumot:", encryptedData);
 // Kriptografiya qilingan ma'lumotni qaytarish
 const decryptedData = decryptData(encryptedData, secretKey);
 console.log("Qaytarilgan ma'lumot:", decryptedData);
+
