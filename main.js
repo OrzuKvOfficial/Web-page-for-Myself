@@ -153,3 +153,10 @@ console.log("Kriptografiya qilingan ma'lumot:", encryptedData);
 const decryptedData = decryptData(encryptedData, secretKey);
 console.log("Qaytarilgan ma'lumot:", decryptedData);
 
+// Xavfsizlik uchun harakat qilish
+const imageElement = document.createElement('img');
+imageElement.src = 'https://example.com/image.jpg';
+imageElement.addEventListener('error', () => {
+    console.error('Rasm yuklanmadi');
+});
+document.body.appendChild(imageElement);
