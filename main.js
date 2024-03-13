@@ -137,12 +137,6 @@ function encryptData(data, key) {
     return CryptoJS.AES.encrypt(data, key).toString();
 }
 
-// Kriptografiya qilingan ma'lumotni qaytarish funksiyasi
-function decryptData(encryptedData, key) {
-    const bytes = CryptoJS.AES.decrypt(encryptedData, key);
-    return bytes.toString(CryptoJS.enc.Utf8);
-}
-
 // Ma'lumot kriptografiya qilinadi
 const originalData = "Maxfiy ma'lumot";
 const secretKey = "sirli_kalit";
