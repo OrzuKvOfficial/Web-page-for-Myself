@@ -184,3 +184,19 @@ console.log("Ayirish: " + calculator.subtract(10, 4));  // Natija: 6
 console.log("Ko'paytirish: " + calculator.multiply(2, 6)); // Natija: 12
 console.log("Bo'lish: " + calculator.divide(8, 2));     // Natija: 4
 console.log("Bo'lish: " + calculator.divide(10, 0));    // Natija: "Nolga bo'lish mumkin emas"
+
+
+    function calculateFactorial() {
+        // Metin kutusundan girilen sayı alınır
+        var number = parseInt(document.getElementById('numberInput').value);
+        
+        // Faktöriyel hesaplanır
+        var factorial = 1;
+        for (var i = 1; i <= number; i++) {
+            factorial *= i;
+        }
+        
+        // Sonuç metin kutusuna yazdırılır
+        document.getElementById('result').innerText = 'Faktöriyel: ' + factorial;
+    }
+
