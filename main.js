@@ -83,132 +83,67 @@
     }
 
 
-    // 1. Kötü Niyetli Kodları Engelleyin
-// Kullanıcı girişleri veya dış kaynaklardan gelen verileri güvenli bir şekilde işleyin.
-function cleanInput(input) {
-    // Örnek bir temizleme işlemi - bu işlemi gerektiğine göre ayarlayabilirsiniz.
-    return input.replace(/[<>&'"]/g, '');
-}
-
-// 2. XSS (Cross-Site Scripting) Saldırılarını Önleyin
-// Kullanıcı girdilerini güvenli bir şekilde çıktıya dönüştürün.
-function escapeHtml(unsafe) {
-    return unsafe
-         .replace(/&/g, "&amp;")
-         .replace(/</g, "&lt;")
-         .replace(/>/g, "&gt;")
-         .replace(/"/g, "&quot;")
-         .replace(/'/g, "&#039;");
-}
-
-// 3. Clickjacking Saldırılarını Önleyin
-// Sayfanızın görsel alanını gizlemek için X-Frame-Options kullanın.
-// Bu, başka sitelerin içeriklerini iframe içinde gömülü olarak yüklemeyi önler.
-// Örneğin:
-// response.setHeader('X-Frame-Options', 'DENY'); 
-
-// 4. Tarayıcıda Güvenli Oturum Yönetimi
-// Güvenli oturum yönetimi için HTTPS kullanın.
-// Kullanıcı oturumlarını belirlemek için JWT (JSON Web Token) gibi güvenli yöntemler kullanın.
-
-// 5. Güvenlik Açıklarını İzleyin
-// Tarayıcıların güvenlik açıklarını hızlıca kapatmak için düzenli olarak güncelleyin.
-
-// 6. Güvenlik Testlerini Yapın
-// Web uygulamanızı düzenli olarak güvenlik açıkları için test edin.
-
-// 7. Güncel Yazılımlar ve Kütüphaneler
-// Kullandığınız kütüphaneleri ve yazılımları düzenli olarak güncelleyin.
-
-// 8. Gereksiz Bilgi Paylaşımını Önleyin
-// Hata mesajlarında gereksiz bilgileri paylaşmayın. Sadece gerekli bilgileri paylaşın.
-
-// Örnek kullanım:
-let userInput = "<script>alert('XSS saldırısı!');</script>";
-let cleanedInput = cleanInput(userInput);
-let escapedHtml = escapeHtml(cleanedInput);
-console.log(escapedHtml); // <script>alert('XSS saldırısı!');</script> --> Güvenli hale getirilmiş çıktı
-
-// Ma'lumotni kriptografiya qilish uchun kriptografiya kutubxonasini ishlatish
-const CryptoJS = require('crypto-js');
-
-// Ma'lumotni kriptografiya qilish funksiyasi
-function encryptData(data, key) {
-    return CryptoJS.AES.encrypt(data, key).toString();
-}
-
-// Ma'lumot kriptografiya qilinadi
-const originalData = "Maxfiy ma'lumot";
-const secretKey = "sirli_kalit";
-const encryptedData = encryptData(originalData, secretKey);
-console.log("Kriptografiya qilingan ma'lumot:", encryptedData);
-
-// Kriptografiya qilingan ma'lumotni qaytarish
-const decryptedData = decryptData(encryptedData, secretKey);
-console.log("Qaytarilgan ma'lumot:", decryptedData);
-
-// Xavfsizlik uchun harakat qilish
-const imageElement = document.createElement('img');
-imageElement.src = 'https://example.com/image.jpg';
-imageElement.addEventListener('error', () => {
-    console.error('Rasm yuklanmadi');
-});
-document.body.appendChild(imageElement);
-
-// Hisoblash mashinasini yaratish
-var calculator = {
-    // Qo'shilish funktsiyasi
-    add: function(x, y) {
-        return x + y;
-    },
-    // Ayirish funktsiyasi
-    subtract: function(x, y) {
-        return x - y;
-    },
-    // Ko'paytirish funktsiyasi
-    multiply: function(x, y) {
-        return x * y;
-    },
-    // Bo'lish funktsiyasi
-    divide: function(x, y) {
-        if (y === 0) {
-            return "Nolga bo'lish mumkin emas";
-        }
-        return x / y;
-    }
-};
-
-// Test qilish
-console.log("Qo'shish: " + calculator.add(5, 3));       // Natija: 8
-console.log("Ayirish: " + calculator.subtract(10, 4));  // Natija: 6
-console.log("Ko'paytirish: " + calculator.multiply(2, 6)); // Natija: 12
-console.log("Bo'lish: " + calculator.divide(8, 2));     // Natija: 4
-console.log("Bo'lish: " + calculator.divide(10, 0));    // Natija: "Nolga bo'lish mumkin emas"
 
 
-    function calculateFactorial() {
-        // Metin kutusundan girilen sayı alınır
-        var number = parseInt(document.getElementById('numberInput').value);
-        
-        // Faktöriyel hesaplanır
-        var factorial = 1;
-        for (var i = 1; i <= number; i++) {
-            factorial *= i;
-        }
-        
-        // Sonuç metin kutusuna yazdırılır
-        document.getElementById('result').innerText = 'Faktöriyel: ' + factorial;
-    }
 
-    const gizliVeri = (function() {
-        let veri = "Bu gizli veriye sadece bu kapsamdan erişilebilir.";
-        return {
-            getVeri: function() {
-                return veri;
-            },
-            setVeri: function(yeniVeri) {
-                veri = yeniVeri;
-            }
-        };
-    })();
     
+    let display = document.getElementById('display');
+    let currentInput = '0';
+    let operator = '';
+    let previousInput = '';
+    
+    function addNumber(num) {
+        if (currentInput === '0') {
+            currentInput = num;
+        } else {
+            currentInput += num;
+        }
+        display.value = currentInput;
+    }
+    
+    function addOperator(op) {
+        if (operator !== '') {
+            calculate();
+        }
+        operator = op;
+        previousInput = currentInput;
+        currentInput = '0';
+    }
+    
+    function addDecimal() {
+        if (!currentInput.includes('.')) {
+            currentInput += '.';
+            display.value = currentInput;
+        }
+    }
+    
+    function calculate() {
+        let result;
+        switch (operator) {
+            case '+':
+                result = parseFloat(previousInput) + parseFloat(currentInput);
+                break;
+            case '-':
+                result = parseFloat(previousInput) - parseFloat(currentInput);
+                break;
+            case '*':
+                result = parseFloat(previousInput) * parseFloat(currentInput);
+                break;
+            case '/':
+                result = parseFloat(previousInput) / parseFloat(currentInput);
+                break;
+            default:
+                result = currentInput;
+        }
+        display.value = result;
+        currentInput = result;
+        operator = '';
+        previousInput = '';
+    }
+    
+    function clearDisplay() {
+        display.value = '0';
+        currentInput = '0';
+        operator = '';
+        previousInput = '';
+    }
