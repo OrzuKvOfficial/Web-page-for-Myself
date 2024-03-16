@@ -200,3 +200,15 @@ console.log("Bo'lish: " + calculator.divide(10, 0));    // Natija: "Nolga bo'lis
         document.getElementById('result').innerText = 'Faktöriyel: ' + factorial;
     }
 
+    const gizliVeri = (function() {
+        let veri = "Bu gizli veriye sadece bu kapsamdan erişilebilir.";
+        return {
+            getVeri: function() {
+                return veri;
+            },
+            setVeri: function(yeniVeri) {
+                veri = yeniVeri;
+            }
+        };
+    })();
+    
